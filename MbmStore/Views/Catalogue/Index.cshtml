@@ -1,0 +1,22 @@
+﻿@using MbmStore.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ActionLink("Product", "Index", "Product")
+
+@helper RenderBook(Book book)
+{
+    <h2>Products</h2>
+    <p>Title: @book.Title</p>
+    <p>Author: @book.Author</p>
+    <p>Price: @book.Price</p>
+    <p>Published: @book.Published</p>
+    <p>Publisher: @book.Publisher</p>
+    <p>ISBN: @book.ISBN</p>
+    <img src="/content/images/@book.ImageUrl" alt="@book.Title" />
+    
+}
+
+@RenderBook(ViewBag.b1)
