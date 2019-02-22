@@ -45,10 +45,11 @@ namespace MbmStore.Models
             }
         }
 
-        public Product (string title, decimal price, string ImageUrl)
+        public Product (string title, decimal price, string imageUrl)
         {
            this.Title = title;
             this.Price = price;
+            this.ImageUrl = imageUrl;
        
         }
 

@@ -10,10 +10,10 @@ namespace MbmStore.Models
         public string Artist { get; set; }
         public string Label { get; set; }
         public short Released { get; set; }
-        private List<string> tracks = new List<string>();
+        private List<Track> tracks = new List<Track>();
 
 
-        public List<string> Tracks
+        public List<Track> Tracks
         {
             get
             {
@@ -27,11 +27,22 @@ namespace MbmStore.Models
             Released = released;
         }
 
-        public void AddTrack (string track)
+        public void AddTrack (Track track)
         {
-            tracks.Add(track);
+            Tracks.Add(track);
         }
 
-     
+        public TimeSpan GetPlayingTime()
+        {
+            TimeSpan result = new TimeSpan(0, 0, 0);
+            foreach (Track track in tracks)
+            {
+                result = track.Length + result;
+            }
+
+            return result;
+        }
+
+
     }
 }
