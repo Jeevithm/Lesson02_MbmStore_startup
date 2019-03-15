@@ -3,10 +3,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h1>Welcome to the webshop</h1>
 <ul>
+   
     <li>
-        @Html.ActionLink("Movies", "Index", "Movie")
+        @Html.ActionLink("Catalogues", "Index", "Catalogue")
     </li>
+    <li>
+        @Html.ActionLink("Customer", "Index", "Customer")
+    </li>
+    <li>
+        @Html.ActionLink("Invoices", "Index", "Invoice")
+    </li>
+
 </ul>

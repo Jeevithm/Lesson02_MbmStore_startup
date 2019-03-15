@@ -7,26 +7,9 @@ namespace MbmStore.Models
 {
     public class Product
     {
-        private string title;       
+        public string Title { get; set; }       
         private decimal price;
-
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
-
-        public string ImageUrl
-        {
-            get;
-            set;
-        }
+        public string ImageUrl { get; set;}
 
         public decimal Price
         {

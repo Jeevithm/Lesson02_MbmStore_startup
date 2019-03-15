@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MbmStore.Infrastructure;
 using MbmStore.Models;
 
 namespace MbmStore.Controllers
@@ -12,18 +13,22 @@ namespace MbmStore.Controllers
         // GET: Catalogue
         public ActionResult Index()
         {
-            Book b1 = new Book("Jungle","Jeevith", "Natteravn", 300, 2018, "junglebook.jpg", 161531861);
 
-            ViewBag.B1 = b1;
-            MusicCD cd1 = new MusicCD("X (Deluxe Edition)", "Svedigt Musik", 323, 2010, "edsheeran.jpg");
+            List<Book> books = new List<Book>();
+            books = Repository.Products.OfType<Book>().ToList();
 
-           Track t1 = new Track("Without me", "Eminem", new TimeSpan (0, 3, 20));
-           Track t2 = new Track("Shape of you", "Ed Sheeran", new TimeSpan(0, 4, 20));
-            cd1.AddTrack(t1);
-           cd1.AddTrack(t2);
+            List<MusicCD> musicCD = new List<MusicCD>();
+            musicCD = Repository.Products.OfType < MusicCD>().ToList();
 
-            ViewBag.Cd1 = cd1;
-           
+            List<Movie> movies = new List<Movie>();
+            movies = Repository.Products.OfType<Movie>().ToList();
+
+
+            ViewBag.Products = Repository.Products;
+            ViewBag.MusicCD = musicCD;
+            ViewBag.Book = books;
+            ViewBag.Movie = movies;
+
 
             return View();
         }

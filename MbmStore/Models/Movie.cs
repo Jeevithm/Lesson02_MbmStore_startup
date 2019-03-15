@@ -12,6 +12,7 @@ namespace MbmStore.Models
         //private decimal price; 
         //private string imageUrl { get; set; }
         private string director;
+        public short Released { get; set; }
 
 
    /*     // properties

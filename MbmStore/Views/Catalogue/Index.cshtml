@@ -1,45 +1,75 @@
 ﻿@using MbmStore.Models;
 
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
-@Html.ActionLink("Product", "Index", "Product")
 
-@helper RenderBook(Book book)
+@foreach (Product product in ViewBag.Products)
 {
-    <h2>Products</h2>
-    <p>Title: @book.Title</p>
-    <p>Author: @book.Author</p>
-    <p>Price: @book.Price</p>
-    <p>Published: @book.Published</p>
-    <p>Publisher: @book.Publisher</p>
-    <p>ISBN: @book.ISBN</p>
-    <img src="/content/images/@book.ImageUrl" alt="@book.Title" />
+
+    if (product is Book)
+    {
+        Book book = (Book)product;
+
+
+        <h2>Book</h2>
+        <p>Title: @book.Title</p>
+        <p>Author: @book.Author</p>
+        <p>Price: @book.Price</p>
+        <p>Published: @book.Published</p>
+        <p>Publisher: @book.Publisher</p>
+        <p>ISBN: @book.ISBN</p>
+        <img src="/content/images/@book.ImageUrl" alt="@book.Title" />
+    }
 }
 
-@helper RenderMusicCD(MusicCD musicCD)
+
+@foreach (Product product in ViewBag.Products)
 {
-    <H2> @musicCD.Title</H2>
-    <p>Artist: @musicCD.Artist</p>
-    <p>Price: @musicCD.Price</p>
-    <p>Udgivelse: @musicCD.Released</p>
-    <p><img src="~/Content/Images/@musicCD.ImageUrl" alt="@musicCD.Title"/></p>
+    if (product is MusicCD)
+    {
+        MusicCD musicCD = (MusicCD)product;
+        <H2> @musicCD.Title</H2>
+        <p>Artist: @musicCD.Artist</p>
+        <p>Price: @musicCD.Price</p>
+        <p>Udgivelse: @musicCD.Released</p>
+        <p><img src="~/Content/Images/@musicCD.ImageUrl" alt="@musicCD.Title" /></p>
 
-    <strong>Tracks:</strong>
-    <ol>
-        @foreach (Track track in @musicCD.Tracks)
-        {
-            <li>
-                @track.Title (@track.Composer)
-                @track.Length.Minutes:@track.Length.Seconds
-            </li>
-        }
-    </ol>
-    <p>Total playing time: @musicCD.GetPlayingTime()</p>
+        <strong>Tracks:</strong>
+        <ol>
+            @foreach (Track track in @musicCD.Tracks)
+            {
+                <li>
+                    @track.Title (@track.Composer)
+                    @track.Length.Minutes:@track.Length.Seconds
+                </li>
+            }
+        </ol>
+        <p>Total playing time: @musicCD.GetPlayingTime()</p>
 
-
+    }
 }
 
-@RenderBook(ViewBag.b1)
-@RenderMusicCD(ViewBag.cd1)
+
+
+<h2>The Movies</h2>
+@foreach (Product product in ViewBag.Products)
+{
+    if (product is Movie)
+    {
+        Movie movie = (Movie)product;
+        <div>
+            <strong>Title:</strong> @movie.Title<br />
+            Director: @movie.Director<br>
+            Price: @String.Format("{0:0.00}", movie.Price) <br /><br />
+            <img src="/Content/Images/@movie.ImageUrl" alt="@movie.Title" />
+        </div>
+    }
+}
+
+
+
+

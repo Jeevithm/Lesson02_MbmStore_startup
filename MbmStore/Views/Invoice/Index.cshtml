@@ -1,0 +1,33 @@
+﻿@using MbmStore.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("CustomerId", "Select customer")
+    <button type="submit">Show invoices</button>
+}
+    </div>
+
+
+    @foreach (Invoice invoice in ViewBag.Invoices)
+    {
+        <p>@invoice.customer.firstname @invoice.customer.lastname</p>
+
+
+
+
+        foreach (OrderItem item in invoice.OrderItems)
+        {
+            <p> @item.product.Title </p>
+            <p> @item.product.Price</p>
+        }
+        <p> @invoice.TotalPrice</p>
+    }
+
+
+
+
+

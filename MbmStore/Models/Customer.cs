@@ -13,14 +13,26 @@ namespace MbmStore.Models
         public string zip { get; set; }
         public string city { get; set; }
         public int age { get; set; }
-        public DateTime birthDate { get; set; }
+        private DateTime birthDate { get; set; }
         List<string> phoneNumbers = new List<string>();
+        List<Invoice> invoices = new List<Invoice>();
+        public int CustomerId { get; set; }
+
+        private List<Track> tracks = new List<Track>();
 
         public List<string> PhoneNumbers
         {
             get
             {
                 return phoneNumbers;
+            }
+        }
+
+        public List<Invoice> Invoice
+        {
+            get
+            {
+                return invoices;
             }
         }
 
@@ -39,6 +51,7 @@ namespace MbmStore.Models
                 return age;
             }
         }
+
         public DateTime BirthDate
         {
             set
@@ -73,6 +86,12 @@ namespace MbmStore.Models
             public void addPhone(string phone)
         {
             phoneNumbers.Add(phone);
+        }
+
+
+        public void addInvoice(Invoice invoice)
+        {
+            invoices.Add(invoice);
         }
     }
 }

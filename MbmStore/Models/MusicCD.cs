@@ -21,13 +21,13 @@ namespace MbmStore.Models
             }
         }
 
-        public MusicCD (string artist, string title, decimal price, short released, string imageUrl) : base(title, price, imageUrl)
+        public MusicCD(string artist, string title, decimal price, short released, string imageUrl) : base(title, price, imageUrl)
         {
-            Artist = artist;   
+            Artist = artist;
             Released = released;
         }
 
-        public void AddTrack (Track track)
+        public void AddTrack(Track track)
         {
             Tracks.Add(track);
         }
