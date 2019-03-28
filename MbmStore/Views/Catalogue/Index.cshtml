@@ -1,75 +1,57 @@
 ﻿@using MbmStore.Models;
+@model MbmStore.ViewModels.ProductsListViewModel
 
 @{
-    /**/
-
     ViewBag.Title = "Index";
 }
-
-
-@foreach (Product product in ViewBag.Products)
+@using (Html.BeginForm("Index", "Cart"))
 {
-
-    if (product is Book)
-    {
-        Book book = (Book)product;
-
-
-        <h2>Book</h2>
-        <p>Title: @book.Title</p>
-        <p>Author: @book.Author</p>
-        <p>Price: @book.Price</p>
-        <p>Published: @book.Published</p>
-        <p>Publisher: @book.Publisher</p>
-        <p>ISBN: @book.ISBN</p>
-        <img src="/content/images/@book.ImageUrl" alt="@book.Title" />
-    }
-}
-
-
-@foreach (Product product in ViewBag.Products)
-{
-    if (product is MusicCD)
-    {
-        MusicCD musicCD = (MusicCD)product;
-        <H2> @musicCD.Title</H2>
-        <p>Artist: @musicCD.Artist</p>
-        <p>Price: @musicCD.Price</p>
-        <p>Udgivelse: @musicCD.Released</p>
-        <p><img src="~/Content/Images/@musicCD.ImageUrl" alt="@musicCD.Title" /></p>
-
-        <strong>Tracks:</strong>
-        <ol>
-            @foreach (Track track in @musicCD.Tracks)
-            {
-                <li>
-                    @track.Title (@track.Composer)
-                    @track.Length.Minutes:@track.Length.Seconds
-                </li>
-            }
-        </ol>
-        <p>Total playing time: @musicCD.GetPlayingTime()</p>
-
-    }
+    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+    <input type="submit" class="btn btn-success" value="View Cart" />
 }
 
 
 
-<h2>The Movies</h2>
-@foreach (Product product in ViewBag.Products)
+
+@if (Model.Products.OfType<Book>().Count() > 0)
 {
-    if (product is Movie)
+    <h2>The Books</h2>
+    foreach (Book book in Model.Products.OfType<Book>().ToList())
     {
-        Movie movie = (Movie)product;
-        <div>
-            <strong>Title:</strong> @movie.Title<br />
-            Director: @movie.Director<br>
-            Price: @String.Format("{0:0.00}", movie.Price) <br /><br />
-            <img src="/Content/Images/@movie.ImageUrl" alt="@movie.Title" />
-        </div>
+        @Html.Partial("_ProductSummaryBook", book);
+        <br />
     }
 }
 
+
+@if (Model.Products.OfType<Movie>().Count() > 0)
+{
+    <h2>The Movies</h2>
+    foreach (Movie movie in Model.Products.OfType<Movie>().ToList())
+    {
+        @Html.Partial("_ProductSummaryMovie", movie);
+        <br />
+    }
+}
+
+
+@if (Model.Products.OfType<MusicCD>().Count() > 0)
+{
+    <h2>The Music</h2>
+    foreach (MusicCD musicCD in Model.Products.OfType<MusicCD>().ToList())
+    {
+        @Html.Partial("_ProductSummaryMusicCD", musicCD);
+        <br />
+    }
+}
+
+       
+            <div>
+                @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, category =
+               Model.CurrentCategory }))
+            </div>
+
+  
 
 
 

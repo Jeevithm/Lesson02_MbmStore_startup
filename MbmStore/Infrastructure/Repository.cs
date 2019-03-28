@@ -18,10 +18,17 @@ namespace MbmStore.Infrastructure
             Book b1 = new Book("Jungle", "Jeevith", "Natteravn", 300, 2018, "junglebook.jpg", 161531861);
 
             Products.Add(b1);
+            b1.ProductId = 1;
+            b1.Category = "Book";
+
+
 
             MusicCD cd1 = new MusicCD("X (Deluxe Edition)", "Svedigt Musik", 323, 2010, "edsheeran.jpg");
 
             Products.Add(cd1);
+            cd1.ProductId = 2;
+            cd1.Category = "MusicCD";
+
 
             Track t1 = new Track("Without me", "Eminem", new TimeSpan(0, 3, 20));
             Track t2 = new Track("Shape of you", "Ed Sheeran", new TimeSpan(0, 4, 20));
@@ -34,9 +41,21 @@ namespace MbmStore.Infrastructure
             Movie lionKings = new Movie("Lion Kings", 200.40m, "gladiator.jpg", "Marc Høgh");
             Movie frozen = new Movie("Frozen", 120.50m, "frozen.jpeg", "Jeff");
 
+
             Products.Add(jungleBook);
             Products.Add(lionKings);
             Products.Add(frozen);
+
+            jungleBook.ProductId = 3;
+            jungleBook.Category = "Movie";
+
+            lionKings.ProductId = 4;
+            lionKings.Category = "Movie";
+
+
+            frozen.ProductId = 5;
+            frozen.Category = "Movie";
+
 
             Customer customer1 = new Customer("Hans", "Jensen", "Risdalsvej 40", "8260", "Viby J");
             customer1.addPhone("26334664");

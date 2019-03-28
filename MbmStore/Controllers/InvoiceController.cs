@@ -31,7 +31,9 @@ namespace MbmStore.Controllers
 
             // removes duplicate entries with same ID from a IEnumerable
             customers = customers.GroupBy(x => x.Value).Select(y => y.First()).OrderBy(z =>
-            z.Text).ToList<SelectListItem>();
+            z.Text).ToList<SelectListItem>();
+
+
             ViewBag.Invoices = Repository.Invoices;
             ViewBag.CustomerId = customers;
 
@@ -62,14 +64,16 @@ namespace MbmStore.Controllers
             {
                 // select invoices for a customer with linq
                 invoices = Repository.Invoices.Where(r => r.customer.CustomerId == CustomerId);
-            }
+            }
+
             ViewBag.Invoices = invoices;
             ViewBag.CustomerId = customers;
 
             return View();
 
         }
-
+
+
 
     }
 }

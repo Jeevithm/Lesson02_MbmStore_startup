@@ -10,6 +10,8 @@ namespace MbmStore.Models
         public string Title { get; set; }       
         private decimal price;
         public string ImageUrl { get; set;}
+        public int  ProductId { get; set;}
+        public string Category { get; set;}
 
         public decimal Price
         {
