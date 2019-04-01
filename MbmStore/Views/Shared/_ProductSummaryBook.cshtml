@@ -13,7 +13,16 @@
         <strong>Publisher:</strong> @Model.Publisher (@Model.Published)<br />
         <strong>ISBN:</strong> @Model.ISBN<br /> <br />
     </div>
+
+
     <div class="col-md-7">
+        <!-- Add Quantity dropdown menu for the products-->
+        <div class="form-group">
+             <label for="ProductQuantity" class="control-label">Quantity</label>
+            @{ var productQuantities = new SelectList(Enumerable.Range(1, 10)); }
+            @Html.DropDownList("Quantity", productQuantities, new { @class = "form-control"})
+        </div>
+
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             @Html.Hidden("ProductId", Model.ProductId)

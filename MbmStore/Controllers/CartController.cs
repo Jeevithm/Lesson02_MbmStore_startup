@@ -11,6 +11,37 @@ namespace MbmStore.Controllers
 {
     public class CartController : Controller
     {
+        // ... action methods omitted for brevity...
+        public PartialViewResult Summary(Cart cart)
+        {
+            return PartialView(cart);
+        }
+
+        // ... other action methods omitted for brevity ...
+        public ViewResult Checkout()
+        {
+            return View(new ShippingDetails());
+        }
+
+        //Checkout method
+        [HttpPost]
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        {
+            if (cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
+            }
+            if (ModelState.IsValid)
+            {
+                // order processing logic
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
+        }
 
         public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
